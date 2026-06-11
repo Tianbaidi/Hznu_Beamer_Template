@@ -1,162 +1,189 @@
 % Copyright 2009 by Pim Vullers
 %
-% This file may be distributed and/or modified
-%
-% 1. under the LaTeX Project Public License and/or
-% 2. under the GNU Public License.
-%
+% This file may be distributed and/or modified under the terms of the
+% LaTeX Project Public License and/or the GNU Public License.
 
-%%%
-%%% Inherit definitions from existing themes (DO NOT MODIFY THESE)
-%%%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{hznu}[2026/06/11 Modern HZNU Beamer theme]
+\RequirePackage{tikz}
 
-% Layout scheme for outer elements: split header and footer
-\useoutertheme{split}
+% 品牌配色：深蓝体现学术感，金色仅用于少量强调。
+\definecolor{hznuNavy}{HTML}{103A5C}
+\definecolor{hznuBlue}{HTML}{087DB8}
+\definecolor{hznuSky}{HTML}{EDF5F9}
+\definecolor{hznuGold}{HTML}{B8954B}
+\definecolor{hznuInk}{HTML}{183447}
+\definecolor{hznuMuted}{HTML}{657B8B}
+\definecolor{hznuLine}{HTML}{D6E3EA}
 
-% Color scheme for outer elements: use background colors
-\usecolortheme{whale}
-
-% Layout scheme for inner elements: rounded elements
 \useinnertheme{rounded}
+\usefonttheme{professionalfonts}
 
-% Color scheme for inner elements: use foreground colors
-\usecolortheme{orchid}
+\setbeamercolor{normal text}{fg=hznuInk,bg=white}
+\setbeamercolor{structure}{fg=hznuBlue}
+\setbeamercolor{alerted text}{fg=hznuGold}
+\setbeamercolor{title}{fg=hznuNavy}
+\setbeamercolor{subtitle}{fg=hznuMuted}
+\setbeamercolor{author}{fg=hznuInk}
+\setbeamercolor{institute}{fg=hznuMuted}
+\setbeamercolor{date}{fg=hznuMuted}
+\setbeamercolor{frametitle}{fg=hznuNavy,bg=white}
+\setbeamercolor{headline}{fg=white,bg=hznuNavy}
+\setbeamercolor{section in head/foot}{fg=white,bg=hznuNavy}
+\setbeamercolor{section in head/foot shaded}{fg=white!52!hznuNavy,bg=hznuNavy}
+\setbeamercolor{footline}{fg=hznuMuted,bg=white}
+\setbeamercolor{separation line}{fg=hznuLine}
+\setbeamercolor{block title}{fg=hznuNavy,bg=hznuSky}
+\setbeamercolor{block body}{fg=hznuInk,bg=hznuSky!55!white}
+\setbeamercolor{block title alerted}{fg=white,bg=hznuGold}
+\setbeamercolor{block body alerted}{fg=hznuInk,bg=hznuGold!10!white}
+\setbeamercolor{block title example}{fg=white,bg=hznuBlue}
+\setbeamercolor{block body example}{fg=hznuInk,bg=hznuSky!65!white}
 
+\setbeamerfont{title}{size=\LARGE,series=\bfseries}
+\setbeamerfont{subtitle}{size=\large}
+\setbeamerfont{author}{size=\normalsize}
+\setbeamerfont{institute}{size=\small}
+\setbeamerfont{date}{size=\small}
+\setbeamerfont{frametitle}{size=\large,series=\bfseries}
+\setbeamerfont{section in head/foot}{size=\scriptsize,series=\bfseries}
+\setbeamerfont{footline}{size=\scriptsize}
+\setbeamerfont{block title}{series=\bfseries}
 
-%%%
-%%% Tweak definitions of inner theme to match personal preferences (MODIFY THESE)
-%%%
-
-% Itemize items: default (triangle), circle, square, ball
+\setbeamersize{text margin left=.65cm,text margin right=.65cm}
+\setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{itemize items}[circle]
-
-% Enumerate items: default, circle, square, ball
 \setbeamertemplate{enumerate items}[circle]
+\setbeamertemplate{sections/subsections in toc}[sections numbered]
+\setbeamertemplate{blocks}[rounded][shadow=false]
 
-% Outline: default, sections numbered, subsections numbered, circle, square, ball, ball unnumbered
-\setbeamertemplate{sections/subsections in toc}[default]
-
-% General blocks:
-\setbeamertemplate{blocks}[rounded]
-
-% Title page:
-\setbeamertemplate{title page}[default][colsep=-4bp,rounded=true]
-
-% Part page:
-\setbeamertemplate{part page}[default][colsep=-4bp,rounded=true]
-
-% Navigation symbols:
-% \setbeamertemplate{navigation symbols}{}
-
-
-%%%
-%%% Tweak definitions of outer theme to match Radboud (website) style
-%%%
-
-% Background
-\pgfdeclareimage[width=\paperwidth,height=\paperheight]{bg}{res/hznu_background}
-\setbeamertemplate{background}{\pgfuseimage{bg}}
-
-% Colors
-%\usecolortheme[RGB={182,11,45}]{structure}
-\usecolortheme[RGB={5,133,208}]{structure}
-
-\setbeamercolor{frametitle}{parent=subsection in head/foot}
-\setbeamercolor{frametitle right}{parent=section in head/foot}
-
-
-\pgfdeclarehorizontalshading[frametitle.bg,frametitle right.bg]{beamer@frametitleshade}{\paperheight}{%
-  color(0pt)=(frametitle.bg);
-  color(\paperwidth)=(frametitle right.bg)}
-
-\AtBeginDocument{
-  \pgfdeclareverticalshading{beamer@topshade}{\paperwidth}{%
-    color(0pt)=(bg);
-    color(4pt)=(black!50!bg)}
+% 在页面前景使用正片叠底混合水印：白色区域不遮挡内容，
+% 浅蓝校徽则能显示在区块底色之上。
+\pgfdeclareimage[width=\paperwidth,height=\paperheight]
+  {hznu-background}{res/hznu_background.png}
+\AddToHook{shipout/foreground}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[
+      anchor=center,
+      inner sep=0pt,
+      blend mode=multiply
+    ] at (current page.center) {\pgfuseimage{hznu-background}};
+  \end{tikzpicture}%
 }
 
-% Footline: AUTHOR | TITLE | DATE FRAMENUMBER
+\pgfdeclareimage[height=2.15ex]{hznu-title}{res/hznu_title.png}
+\pgfdeclareimage[height=2.7ex]{hznu-logo}{res/hznu_logo.png}
+\logo{\pgfuseimage{hznu-logo}}
 
-\defbeamertemplate*{footline}{hznu theme}{%
-  \leavevmode%
-  \hbox{%
-    \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
-      \usebeamerfont{author in head/foot}\insertshortauthor
-    \end{beamercolorbox}%
-    \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
-      \usebeamerfont{author in head/foot}\insertshortdate
-    \end{beamercolorbox}%
-    \begin{beamercolorbox}[wd=.435\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
-      \usebeamerfont{title in head/foot}\insertshorttitle
-    \end{beamercolorbox}%
-    \begin{beamercolorbox}[wd=0.065\paperwidth,ht=2.25ex,dp=1ex,right]{title in head/foot}%
-      \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
-    \end{beamercolorbox}}%
-  \vskip0pt%
+% 标题页采用左对齐的信息层级，并利用背景中的校徽保持品牌识别。
+\defbeamertemplate*{title page}{hznu theme}{%
+  \vbox{}%
+  \vfill
+  \hspace*{.02\paperwidth}%
+  \begin{minipage}{.67\paperwidth}
+    {\color{hznuGold}\rule{1.35cm}{1.4pt}}\par
+    \vspace{.45cm}
+    {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par}
+    \ifx\insertsubtitle\@empty
+    \else
+      \vspace{.18cm}
+      {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}
+    \fi
+    \vspace{.65cm}
+    {\color{hznuLine}\rule{\linewidth}{.5pt}}\par
+    \vspace{.36cm}
+    {\usebeamerfont{author}\usebeamercolor[fg]{author}\insertauthor\par}
+    \vspace{.22cm}
+    {\usebeamerfont{institute}\usebeamercolor[fg]{institute}\insertinstitute\par}
+    \vspace{.18cm}
+    {\usebeamerfont{date}\usebeamercolor[fg]{date}\insertdate\par}
+  \end{minipage}%
+  \vfill
+  \hspace*{.02\paperwidth}%
+  {\usebeamerfont{section in head/foot}\color{hznuNavy}%
+    HANGZHOU NORMAL UNIVERSITY}%
+  \vspace*{.35cm}
 }
 
+% 细页眉保留章节导航，右侧放置校名与校徽。
 \defbeamertemplate*{headline}{hznu theme}{%
-  \leavevmode%
-  \@tempdimb=6.4375ex%
-  %\multiply\@tempdimb by\beamer@sectionmax%
-  \pgfdeclareimage[height=.95\@tempdimb]{logo}{res/hznu_logo.png}%
-  \pgfdeclareimage[height=1.\@tempdimb]{title_logo}{res/hznu_title.png}%
-  \logo{\pgfuseimage{logo}}%
-  \ifdim\@tempdimb>0pt%
-    \advance\@tempdimb by 1.125ex%
-    \begin{beamercolorbox}[wd=.8\paperwidth,ht=\@tempdimb]{section in head/foot}%
-      \vbox to\@tempdimb{\vfil\insertsectionnavigationhorizontal{.5\textwidth}{\hskip0pt plus1filll}{}\vfil}%
+  \leavevmode
+  \hbox{%
+    \begin{beamercolorbox}[
+      wd=.80\paperwidth,
+      ht=3.15ex,
+      dp=1.05ex,
+      leftskip=.35cm
+    ]{headline}%
+      \usebeamerfont{section in head/foot}%
+      \insertsectionnavigationhorizontal
+        {.74\paperwidth}{\hskip0pt plus1fill}{\hskip.35cm}%
     \end{beamercolorbox}%
-    %% \begin{beamercolorbox}[wd=.4\paperwidth,ht=\@tempdimb,center]{subsection in head/foot}%
-    %%   \vbox to\@tempdimb{\vfil\textbf{\footnotesize\insertshortinstitute~~}\vfil}%
-    %% \end{beamercolorbox}%
-    \begin{beamercolorbox}[wd=.135\paperwidth,ht=\@tempdimb,center]{subsection in head/foot}%
-      \vbox to\@tempdimb{\vfil\pgfuseimage{title_logo}\vfil}%
+    \begin{beamercolorbox}[
+      wd=.20\paperwidth,
+      ht=3.15ex,
+      dp=1.05ex,
+      rightskip=.35cm,
+      right
+    ]{headline}%
+      \pgfuseimage{hznu-title}\hspace{.45em}\pgfuseimage{hznu-logo}%
     \end{beamercolorbox}%
-    \begin{beamercolorbox}[wd=.065\paperwidth,ht=\@tempdimb,center]{subsection in head/foot}%
-      \vbox to\@tempdimb{\vfil\insertlogo\vfil\vfil}%
-    \end{beamercolorbox}%
-  \fi%
+  }%
 }
 
+% 页面标题使用白底、深蓝文字和蓝金双色细线。
 \defbeamertemplate*{frametitle}{hznu theme}{%
-  \nointerlineskip%
-  %\vskip-2pt%
-  \hbox{\leavevmode
-    \advance\beamer@leftmargin by -12bp%
-    \advance\beamer@rightmargin by -12bp%
-    \beamer@tempdim=\textwidth%
-    \advance\beamer@tempdim by \beamer@leftmargin%
-    \advance\beamer@tempdim by \beamer@rightmargin%
-    \hskip-\Gm@lmargin\hbox{%
-      \setbox\beamer@tempbox=\hbox{\begin{minipage}[b]{\paperwidth}%
-          \vbox{}\vskip-.75ex%
-          \leftskip0.3cm%
-          \rightskip0.3cm plus1fil\leavevmode
-          \insertframetitle%
-          \ifx\insertframesubtitle\@empty%
-            \strut\par%
-          \else
-            \par{\usebeamerfont*{framesubtitle}{\usebeamercolor[fg]{framesubtitle}\insertframesubtitle}\strut\par}%
-          \fi%
-          \nointerlineskip
-          \vbox{}%
-        \end{minipage}}%
-      \beamer@tempdim=\ht\beamer@tempbox%
-      \advance\beamer@tempdim by 2pt%
-      \begin{pgfpicture}{0.1mm}{0pt}{1.01\paperwidth}{\beamer@tempdim}
-        \usebeamercolor{frametitle right}
-        \pgfpathrectangle{\pgfpointorigin}{\pgfpoint{\paperwidth}{\beamer@tempdim}}
-        \pgfusepath{clip}
-        \pgftext[left,base]{\pgfuseshading{beamer@frametitleshade}}
-      \end{pgfpicture}
-      \hskip-\paperwidth%
-      \box\beamer@tempbox%
-    }%
-    \hskip-\Gm@rmargin%
+  \nointerlineskip
+  \begin{beamercolorbox}[
+    wd=\paperwidth,
+    ht=3.3ex,
+    dp=.9ex,
+    leftskip=.65cm,
+    rightskip=.65cm
+  ]{frametitle}%
+    \usebeamerfont{frametitle}\insertframetitle
+    \ifx\insertframesubtitle\@empty
+    \else
+      \hfill
+      {\usebeamerfont{framesubtitle}\color{hznuMuted}\insertframesubtitle}%
+    \fi
+  \end{beamercolorbox}%
+  \hbox{%
+    {\color{hznuBlue}\rule{.14\paperwidth}{1.15pt}}%
+    {\color{hznuGold}\rule{.025\paperwidth}{1.15pt}}%
+    {\color{hznuLine}\rule{.835\paperwidth}{.45pt}}%
   }%
-  %  \nointerlineskip
-  %    \vskip-0.2pt
-  %    \hbox to\textwidth{\hskip-\Gm@lmargin\pgfuseshading{beamer@topshade}\hskip-\Gm@rmargin}
-  %    \vskip-2pt
 }
+
+% 页脚仅保留短标题和页码，避免信息拥挤。
+\defbeamertemplate*{footline}{hznu theme}{%
+  \leavevmode
+  {\usebeamercolor[fg]{separation line}\hrule height .45pt}%
+  \hbox{%
+    \begin{beamercolorbox}[
+      wd=.86\paperwidth,
+      ht=2.5ex,
+      dp=1ex,
+      leftskip=.65cm
+    ]{footline}%
+      \usebeamerfont{footline}\insertshorttitle
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[
+      wd=.14\paperwidth,
+      ht=2.5ex,
+      dp=1ex,
+      rightskip=.65cm,
+      right
+    ]{footline}%
+      \usebeamerfont{footline}%
+      \insertframenumber{} / \inserttotalframenumber
+    \end{beamercolorbox}%
+  }%
+}
+
+\setbeamertemplate{title page}[hznu theme]
+\setbeamertemplate{headline}[hznu theme]
+\setbeamertemplate{frametitle}[hznu theme]
+\setbeamertemplate{footline}[hznu theme]
+
+\endinput
