@@ -1,0 +1,432 @@
+% !TeX program = xelatex
+\documentclass[10pt,aspectratio=169]{beamer}
+
+\usepackage{ctex}
+\usepackage{metalogo}
+\usepackage{hznu}
+
+\usefonttheme[onlymath]{serif}
+
+\title[杭州师范大学 Beamer 模板]{杭州师范大学 Beamer 模板}
+\subtitle{——hznu.sty 效果全览}
+
+\author[Yeung Zhaam]{%
+  \texorpdfstring{%
+    杨湛 \\\medskip
+    {\small
+      \href{mailto:2025212501117@stu.hznu.edu.cn}
+        {\nolinkurl{<2025212501117@stu.hznu.edu.cn>}}%
+    } \\
+    {\small \url{https://www.hznu.edu.cn/}}%
+  }{杨湛}%
+}
+
+\institute[数学学院]{%
+  数学学院 \\
+  杭州师范大学%
+}
+
+\date[Apr. 4, 2026]{2026年4月4日}
+
+\begin{document}
+
+% ============================================================
+% 第1页：标题页 (title page)
+% ============================================================
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+% ============================================================
+% 第2页：目录 (table of contents)
+% ============================================================
+\section{提纲}
+\begin{frame}{提纲}
+  \tableofcontents
+\end{frame}
+
+% ============================================================
+% 第3页：配色方案展示
+% ============================================================
+\section{配色方案}
+\begin{frame}{配色方案 — hznu 品牌色板}
+  hznu.sty 定义了 6 种品牌色及其语义用途：
+
+  \vspace{.3cm}
+  \begin{columns}[T]
+    \begin{column}{.48\textwidth}
+      \begin{itemize}
+        \item \makebox[.35cm]{\tikz\fill[hznuNavy] (0,0) rectangle (.28,.28);}\,
+          {\tt hznuNavy} \ \#103A5C \\ —— 标题、frametitle、block 标题
+        \item \makebox[.35cm]{\tikz\fill[hznuBlue] (0,0) rectangle (.28,.28);}\,
+          {\tt hznuBlue} \ \#087DB8 \\ —— 结构元素、超链接、example block
+        \item \makebox[.35cm]{\tikz\fill[hznuSky] (0,0) rectangle (.28,.28);}\,
+          {\tt hznuSky} \ \#EDF5F9 \ \\ —— block 底色、浅色背景
+      \end{itemize}
+    \end{column}
+    \begin{column}{.48\textwidth}
+      \begin{itemize}
+        \item \makebox[.35cm]{\tikz\fill[hznuGold] (0,0) rectangle (.28,.28);}\,
+          {\tt hznuGold} \ \#B8954B \\ —— 强调（alert）、金线装饰
+        \item \makebox[.35cm]{\tikz\fill[hznuInk] (0,0) rectangle (.28,.28);}\,
+          {\tt hznuInk} \ \#183447 \ \\ —— 正文文字、标签
+        \item \makebox[.35cm]{\tikz\fill[hznuMuted] (0,0) rectangle (.28,.28);}\,
+          {\tt hznuMuted} \ \#657B8B \ —— 辅助信息（副标题、日期、页码）
+        \item \makebox[.35cm]{\tikz\fill[hznuLine] (0,0) rectangle (.28,.28);}\,
+          {\tt hznuLine} \ \#D6E3EA \ —— 分割线
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% ============================================================
+% 第4页：文本强调效果
+% ============================================================
+\section{文本强调}
+\begin{frame}{文本强调效果}
+  \begin{block}{Beamer 强调命令}
+    hznu.sty 定制了下列语义色彩的默认外观：
+  \end{block}
+
+  \vspace{.2cm}
+  \begin{itemize}
+    \item 这是普通正文文本 \texttt{\textbackslash normal text}（hznuInk）
+    \item \alert{这是强调文本 \texttt{\textbackslash alert\{...\}}（hznuGold）}
+    \item \structure{这是结构文本 \texttt{\textbackslash structure\{...\}}（hznuBlue）}
+    \item 混合使用：在 \alert{警告} 中可以夹杂 \structure{结构} 信息
+  \end{itemize}
+
+  \vspace{.1cm}
+  \begin{alertblock}{alertblock — 金色警告区块}
+    使用 \texttt{\textbackslash alertblock} 环境展示警告或注意事项。
+    hznuGold 用于标题底色，正文底色为 hznuGold!10!white。
+  \end{alertblock}
+
+  \begin{exampleblock}{exampleblock — 蓝色示例区块}
+    使用 \texttt{\textbackslash exampleblock} 环境展示示例。
+    hznuBlue 用于标题底色。
+  \end{exampleblock}
+\end{frame}
+
+% ============================================================
+% 第5页：列表环境
+% ============================================================
+\section{列表环境}
+\begin{frame}{列表环境 — itemize \& enumerate}
+  \framesubtitle{hznu.sty 默认使用 circle 符号}
+
+  \begin{columns}[T]
+    \begin{column}{.48\textwidth}
+      \begin{block}{无序列表 \texttt{itemize}}
+        \begin{itemize}
+          \item 第一层：圆形符号
+          \begin{itemize}
+            \item 第二层：短横线
+            \begin{itemize}
+              \item 第三层：小方块
+            \end{itemize}
+          \end{itemize}
+          \item 另一个一级条目
+          \item 更多条目展示
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{.48\textwidth}
+      \begin{block}{有序列表 \texttt{enumerate}}
+        \begin{enumerate}
+          \item 第一层：数字圆形
+          \begin{enumerate}
+            \item 第二层：字母
+            \begin{enumerate}
+              \item 第三层：小写罗马数字
+            \end{enumerate}
+          \end{enumerate}
+          \item 继续一级编号
+          \item 层次分明
+        \end{enumerate}
+      \end{block}
+    \end{column}
+  \end{columns}
+
+  \vspace{.2cm}
+  \begin{block}{自定义描述列表 \texttt{description}}
+    \begin{description}
+      \item[Beamer] 一个用于创建演示文稿的 \LaTeX 文档类
+      \item[hznu.sty] 杭州师范大学 Beamer 主题样式文件
+      \item[\XeLaTeX] 推荐编译器，支持中文与系统字体
+    \end{description}
+  \end{block}
+\end{frame}
+
+% ============================================================
+% 第6页：数学公式 — 基本公式
+% ============================================================
+\section{数学公式}
+\subsection{基本公式}
+\begin{frame}{数学公式展示（一）—— 基本公式}
+  \framesubtitle{行内公式与行间编号公式}
+  
+  \begin{block}{行内公式}
+    行内公式嵌入文本流中，使用 \texttt{\$...\$ 或 \textbackslash(...\textbackslash)} 包裹：
+    \begin{itemize}
+      \item 质能方程：$E = mc^2$
+      \item 三角恒等式：$\sin^2\theta + \cos^2\theta = 1$
+      \item 欧拉公式：$e^{i\pi} + 1 = 0$
+      \item 求和记号：$a_1 + a_2 + \cdots + a_n = \sum_{k=1}^{n} a_k$
+    \end{itemize}
+  \end{block}
+\end{frame}
+\begin{frame}{数学公式展示（二）—— 行间编号公式}
+  \vspace{.2cm}
+  \begin{block}{行间编号公式（\texttt{equation} 环境）}
+    \begin{itemize}
+      \item 拉格朗日量：
+      \begin{equation}
+        \mathcal{L} = -\frac{1}{4} F_{\mu\nu}F^{\mu\nu} + i\bar{\psi}\gamma^\mu D_\mu\psi
+      \end{equation}
+      \item 牛顿第二定律：
+      \begin{equation}
+        \mathbf{F} = m\mathbf{a} = m\frac{\mathrm{d}^2\mathbf{r}}{\mathrm{d}t^2}
+      \end{equation}
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+
+% ============================================================
+% 第9页：三种 Block 环境 — 标准 block
+% ============================================================
+\section{区块环境}
+\subsection{标准 block}
+\begin{frame}{区块环境（一）—— 标准 \texttt{block}}
+  \framesubtitle{日常展示最常用的区块环境}
+
+  \begin{block}{标准 Block — 标题示例}
+    block 环境用于组织一般性内容，是整个演示文稿中最常用的结构单元。
+  \end{block}
+
+  \vspace{.3cm}
+  \begin{block}{配色参数}
+    \begin{description}
+      \item[标题底色] \texttt{hznuSky}（\#EDF5F9）—— 浅蓝天空色
+      \item[标题文字] \texttt{hznuNavy}（\#103A5C）—— 深蓝粗体
+      \item[正文底色] \texttt{hznuSky!55!white} —— 天空色进一步淡化
+      \item[正文文字] \texttt{hznuInk}（\#183447）—— 标准墨色
+    \end{description}
+  \end{block}
+\end{frame}
+
+% ============================================================
+% 第10页：三种 Block 环境 — alertblock
+% ============================================================
+\subsection{alertblock}
+\begin{frame}{区块环境（二）—— \texttt{alertblock}}
+  \framesubtitle{金色警告 / 强调区块}
+
+  \begin{alertblock}{alertblock — 警告区块标题}
+    alertblock 用于突出需要特别注意的内容，如重要提醒、注意事项或关键结论。
+  \end{alertblock}
+
+  \vspace{.3cm}
+  \begin{block}{配色参数}
+    \begin{description}
+      \item[标题底色] \texttt{hznuGold}（\#B8954B）—— 金色，搭配白色文字
+      \item[正文底色] \texttt{hznuGold!10!white} —— 极其淡的金色
+      \item[正文文字] \texttt{hznuInk}（\#183447）—— 标准墨色
+    \end{description}
+  \end{block}
+
+
+\end{frame}
+
+% ============================================================
+% 第11页：三种 Block 环境 — exampleblock
+% ============================================================
+\subsection{exampleblock}
+\begin{frame}{区块环境（三）—— \texttt{exampleblock}}
+  \framesubtitle{蓝色示例 / 辅助说明区块}
+
+  \begin{exampleblock}{exampleblock — 示例区块标题}
+    exampleblock 适合展示示例、附加说明、背景知识等辅助性内容。
+  \end{exampleblock}
+
+  \vspace{.3cm}
+  \begin{block}{配色参数}
+    \begin{description}
+      \item[标题底色] \texttt{hznuBlue}（\#087DB8）—— 蓝色，搭配白色文字
+      \item[正文底色] \texttt{hznuSky!65!white} —— 天空色半透明
+      \item[正文文字] \texttt{hznuInk}（\#183447）—— 标准墨色
+    \end{description}
+  \end{block}
+
+  
+\end{frame}
+
+% ============================================================
+% 第12页：页眉页脚与帧标题效果
+% ============================================================
+\section{页面组件}
+\begin{frame}{页眉、帧标题与页脚}
+  \framesubtitle{每个页面均由三层结构组成}
+
+  \begin{columns}[T]
+    \begin{column}{.48\textwidth}
+      \begin{block}{页眉 (headline)}
+        \begin{itemize}
+          \item 深蓝底色（hznuNavy）
+          \item 左侧：当前章节导航
+          \item 右侧：校名图 + 校徽
+          \item 高度 3.15ex
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{.48\textwidth}
+      \begin{block}{帧标题 (frametitle)}
+        \begin{itemize}
+          \item 白底 + hznuNavy 粗体
+          \item 底部三色分隔线：
+          \begin{itemize}
+            \item hznuBlue 粗线
+            \item hznuGold 细线
+            \item hznuLine 淡线
+          \end{itemize}
+          \item 可选 \texttt{\textbackslash framesubtitle}
+        \end{itemize}
+      \end{block}
+    \end{column}
+  \end{columns}
+
+  \vspace{.2cm}
+  \begin{block}{页脚 (footline)}
+    \begin{itemize}
+      \item 细分割线与正文区隔
+      \item 左侧：短标题 \texttt{\textbackslash insertshorttitle}
+      \item 右侧：页码 \texttt{\textbackslash insertframenumber / \textbackslash inserttotalframenumber}
+    \end{itemize}
+  \end{block}
+
+  
+\end{frame}
+
+% ============================================================
+% 第13页：编译方式与依赖
+% ============================================================
+\section{编译说明}
+\begin{frame}{编译方式与依赖}
+  \begin{block}{编译环境}
+    \begin{itemize}
+      \item 推荐安装完整版 TeX Live（\(≥\) 2024）
+      \item 使用 \alert{\XeLaTeX} 编译（支持中文 + 系统字体）
+      \item 依赖宏包：\texttt{ctex}、\texttt{metalogo}、\texttt{tikz}
+    \end{itemize}
+  \end{block}
+
+  \vspace{.25cm}
+  \begin{exampleblock}{编译命令}
+    \begin{center}
+      \texttt{xelatex HZNU\_BeamerTemplate.tex}
+    \end{center}
+    两次编译以生成目录。
+  \end{exampleblock}
+
+\end{frame}
+
+% ============================================================
+% 第14页：效果总结
+% ============================================================
+\section{总结}
+\begin{frame}{效果总结}
+  \framesubtitle{hznu.sty 提供的全部视觉元素}
+
+  \begin{columns}[T]
+    \begin{column}{.5\textwidth}
+      \begin{itemize}
+        \item \structure{6 种品牌色}
+        \begin{itemize}
+          \item hznuNavy / Blue / Sky
+          \item hznuGold / Ink / Muted / Line
+        \end{itemize}
+        \item \structure{3 种 Block}
+        \begin{itemize}
+          \item block（标准）
+          \item alertblock（警告）
+          \item exampleblock（示例）
+        \end{itemize}
+        \item \structure{列表样式}
+        \begin{itemize}
+          \item itemize（circle）
+          \item enumerate（circle）
+          \item description
+        \end{itemize}
+      \end{itemize}
+    \end{column}
+    \begin{column}{.5\textwidth}
+      \begin{itemize}
+        \item \structure{文本强调}
+        \begin{itemize}
+          \item \texttt{\textbackslash alert\{\}}
+          \item \texttt{\textbackslash structure\{\}}
+        \end{itemize}
+        \item \structure{页面组件}
+        \begin{itemize}
+          \item 标题页（title page）
+          \item 页眉（headline）
+          \item 帧标题（frametitle）
+          \item 页脚（footline）
+          \item 背景水印（multiply）
+        \end{itemize}
+        \item \structure{数学公式}
+        \begin{itemize}
+          \item 行内 / equation / align
+          \item cases / 矩阵 / 积分
+        \end{itemize}
+      \end{itemize}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+% ============================================================
+% 第15页：参考文献
+% ============================================================
+\section{参考文献}
+\begin{frame}{参考文献}
+  \framesubtitle{使用 \texttt{thebibliography} 环境}
+
+  \begin{thebibliography}{99}
+    \bibitem{zhao1}
+      Yi~Zhao, \textit{An introduction to X}, Sep.~15, 2015
+    \bibitem{qian2}
+      Er~Qian, San~Sun,
+      Phys.\ Lett.\ A \textbf{xx}, 2xx (20xx)
+    \bibitem{li4}
+      Si~Li, Phys.\ Rev.\ C \textbf{xx}, 5xx (20xx)
+    \bibitem{beamer}
+      T.~Tantau, \textit{The Beamer Class}, \url{https://ctan.org/pkg/beamer}
+    \bibitem{vullers}
+      P.~Vullers, \textit{TU Delft Beamer Theme}, \url{https://github.com/prmwult/TUDelft-Beamer-Theme}
+  \end{thebibliography}
+\end{frame}
+
+% ============================================================
+% 结束页
+% ============================================================
+\begin{frame}[plain]
+  \begin{center}
+    \vspace{2cm}
+    {\usebeamerfont{title}\usebeamercolor[fg]{title}谢谢！}
+
+    \vspace{1cm}
+    {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}Questions \& Answers}
+
+    \vspace{2cm}
+    {\color{hznuGold}\rule{3cm}{1.4pt}}
+
+    \vspace{.3cm}
+    \includegraphics[height=2.5cm]{res/hznu_logo.png}
+
+    \vspace{.3cm}
+    {\usebeamerfont{footline}\color{hznuMuted}HANGZHOU NORMAL UNIVERSITY}
+  \end{center}
+\end{frame}
+
+\end{document}

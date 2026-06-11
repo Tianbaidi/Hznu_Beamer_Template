@@ -1,0 +1,159 @@
+% !TeX program = xelatex
+\documentclass[10pt,aspectratio=169]{beamer}
+
+\usepackage{ctex}
+\usepackage{metalogo}
+\usepackage{hznu}
+
+\usefonttheme[onlymath]{serif}
+
+% ============================================================
+% 标题信息 —— 替换为你的内容
+% ============================================================
+\title[短标题]{完整标题}
+\subtitle{——副标题（可选）}
+
+\author[作者缩写]{%
+  \texorpdfstring{%
+    你的姓名 \\\medskip
+    {\small
+      \href{mailto:yourname@stu.hznu.edu.cn}
+        {\nolinkurl{<yourname@stu.hznu.edu.cn>}}%
+    } \\
+    {\small \url{https://www.hznu.edu.cn/}}%
+  }{你的姓名}%
+}
+
+\institute[学院缩写]{%
+  学院名称 \\
+  杭州师范大学%
+}
+
+\date[\today]{\today}
+
+\begin{document}
+
+% ============================================================
+% 标题页
+% ============================================================
+\begin{frame}[plain]
+  \titlepage
+\end{frame}
+
+% ============================================================
+% 目录
+% ============================================================
+\section{提纲}
+\begin{frame}{提纲}
+  \tableofcontents
+\end{frame}
+
+% ============================================================
+% 第一章
+% ============================================================
+\section{介绍}
+\begin{frame}{介绍}
+  \begin{itemize}
+    \item 这是杭州师范大学 Beamer 模板
+    \item 使用 \XeLaTeX 编译
+    \item 行内公式示例 $E = mc^2$
+    \item 行间公式示例
+      \begin{equation}
+        \int_a^b f(x)\,\mathrm{d}x = F(b) - F(a)
+      \end{equation}
+  \end{itemize}
+\end{frame}
+
+% ============================================================
+% 区块与列表
+% ============================================================
+\section{主要内容}
+\begin{frame}{区块与列表}
+  \framesubtitle{三种 Block 环境}
+
+  \begin{block}{标准 Block}
+    \begin{itemize}
+      \item 第一点
+      \item 第二点
+    \end{itemize}
+  \end{block}
+
+  \begin{alertblock}{警告 Block}
+    这里放需要特别注意的内容。
+  \end{alertblock}
+
+  \begin{exampleblock}{示例 Block}
+    这里放示例、定理或补充说明。
+  \end{exampleblock}
+\end{frame}
+
+\begin{frame}{有序列表与强调}
+  \begin{enumerate}
+    \item 第一步
+    \item 第二步
+    \item \alert{重要提示}
+    \item \structure{关键结构}
+  \end{enumerate}
+
+  \vspace{.5cm}
+  \begin{block}{要点}
+    \begin{description}
+      \item[要点一] 详细说明
+      \item[要点二] 详细说明
+    \end{description}
+  \end{block}
+\end{frame}
+
+% ============================================================
+% 结论
+% ============================================================
+\section{结论}
+\begin{frame}{结论}
+  \begin{itemize}
+    \item 结论一
+    \item 结论二
+    \item 结论三
+  \end{itemize}
+
+  \vspace{.5cm}
+  \begin{exampleblock}{总结}
+    你的总结内容。
+  \end{exampleblock}
+\end{frame}
+
+% ============================================================
+% 参考文献
+% ============================================================
+\section{参考文献}
+\begin{frame}{参考文献}
+  \begin{thebibliography}{99}
+    \bibitem{ref1}
+      Author~One, \textit{Title One}, Journal \textbf{1}, 1--10 (2026)
+    \bibitem{ref2}
+      Author~Two, \textit{Title Two}, Journal \textbf{2}, 20--30 (2026)
+  \end{thebibliography}
+\end{frame}
+
+% ============================================================
+% 结束页
+% ============================================================
+\begin{frame}[plain]
+  \begin{center}
+    \vspace{2cm}
+    {\usebeamerfont{title}\usebeamercolor[fg]{title}谢谢！}
+
+    \vspace{1cm}
+    {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}Questions \& Answers}
+
+    \vspace{2cm}
+    {\color{hznuGold}\rule{3cm}{1.4pt}}
+
+    \vspace{.3cm}
+    \includegraphics[height=2.5cm]{res/hznu_logo.png}
+
+    \vspace{.3cm}
+    {\usebeamerfont{footline}\color{hznuMuted}HANGZHOU NORMAL UNIVERSITY}
+  \end{center}
+\end{frame}
+
+\end{document}
